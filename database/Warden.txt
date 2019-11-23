@@ -1,5 +1,6 @@
 FullName,Id,PhoneNumber,Password,Email
-Cleveland Dach,0,Elena,Joy,Sylvia@hermina.biz
-Lina Wolf,1,Genoveva,Francisca,Ryleigh@hubert.me
-Marilyne Hackett,2,Brad,Ford,Geovany.Macejkovic@justen.name
-Rosamond Crooks,3,Carlo,Vergie,Tara@cornelius.ca
+Cleveland Dach,0,Elena,Joy,rasya.ramesh1999@gmail.com
+Lina Wolf,1,Genoveva,Francisca,rahul.shivaprasad@gmail.com
+Marilyne Hackett,2,Brad,Ford,ramyani.ghosh@gmail.com
+Rosamond Crooks,3,Carlo,Vergie,agarwal.radhika098@gmail.com
+Rosamond Crooks,4,Carlo,Vergie,agarwal.radhika098@gmail.com
