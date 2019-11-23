@@ -1,0 +1,161 @@
+@font-face {
+font-family: "VisbyCF-Heavy";
+src: url("css/fonts/VisbyCF-Heavy.eot");
+src: url("css/fonts/VisbyCF-Heavy.woff") format("woff");
+}
+body {
+	margin: 0;
+	padding: 0;
+	position: relative;
+	width: auto;
+}
+body #page {
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	width: auto;
+}
+a {
+	text-decoration: none;
+	outline: none;
+}
+a:active {
+	background: none;
+}
+img {
+	border: none;
+}
+/*----------------------------------------header-styles---------------------------------------*/
+#header {
+	margin: 0;
+	padding: 0;
+	position: relative;
+	width: 100%;
+
+}
+#header div {
+	margin: 0 auto;
+    max-width: 940px;
+    min-height: 60px; /*227px;*/
+    padding: 0 0px;
+
+
+}
+/*#header div a.logo {
+	display: block;
+    float: left;
+    height: 106px;
+    margin: 44px 0 0;
+    padding: 0;
+    width: 320px;
+
+}
+#header div a.logo img {
+	display: block;
+	margin: 0;
+	padding: 0;
+	width: auto;
+
+}*/
+#header div ul {
+	display: block;
+  /*  float: right;*/
+    list-style: none outside none;
+    margin: 0 ;
+    max-width: 100%;
+    padding: 20px 0 20px;
+    text-align: center;
+}
+#header div ul li {
+	display: inline-block;
+	/*  *float: left; /* Needed for IE7 and old versions */
+	margin: 0 0 0 100px;
+	padding: 0;
+	width: auto;
+}
+#header div ul li a {
+	color: #000000;
+	font-family: "Arial Black";
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 14px;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	text-transform: uppercase;
+	width: auto;
+}
+#header div ul li.selected a, #header div ul li.selected a:hover {
+	color: #fb416f;
+}
+#header div ul li a:hover {
+	color: #16ab88;
+}
+#header div ul li ul {
+	display: none;
+}
+#header span#mobile-navigation, #header span#mobile-submenu, #header div ul li ul {
+	display: none;
+}
+/*----------------------------------------body-home-styles---------------------------------------*/
+#body {
+	background: white;
+	border-top: 2px solid #252525;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	position: relative;
+	width: 100%;
+
+}
+#body.home div {
+	background: none;
+	margin: 0;
+	max-width: none;
+	padding: 0 0 54px;
+	width: 100%;
+}
+#body.home div.header div {
+	background: none;
+	margin: 0 auto;
+	max-width: 960px;
+	padding: 74px 0 0;
+}
+#body.home div.header div h1 {
+	background: none;
+	color: white;
+	display: block;
+	font-family: 'Arial Black';
+	font-size: 90px;
+	font-weight: normal;
+	line-height: 96px;
+	margin: 0 auto 32px;
+	padding: 0;
+	text-align: center;
+	text-transform: uppercase;
+	width: 100%; /*89.5833%;*/
+}
+#body.home div.header div span {
+	display: block;
+	margin: 0 auto 52px;
+	max-width: 350px;
+	overflow: hidden;
+	padding: 0;
+	width: 37.4583%;
+}
+#body.home div.header div span a.email {
+	border: 5px solid #000000;
+	color: #000000;
+	display: block;
+	float: left;
+	font-family: Arial;
+	font-size: 20px;
+	font-weight: bold;
+	height: 47px;
+	line-height: 47px;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	text-transform: uppercase;
+	width: 63.142857142857%;
+}

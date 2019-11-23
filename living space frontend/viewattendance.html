@@ -1,0 +1,100 @@
+<!doctype html>
+<!-- Website template by freewebsitetemplates.com -->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>View Attendance</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+
+  <script>
+      function displayDate()
+      {
+        n =  new Date();
+        y = n.getFullYear();
+        m = n.getMonth();
+        d = n.getDate();
+        document.getElementById("date").innerHTML = "Date:  "+ d + " / " + m + " / " + y;
+      }
+  </script>
+
+</head>
+
+
+
+<body onload="displayDate()">
+	<div id="page">
+		<div id="header">
+			<div id="navigation">
+				<span id="mobile-navigation">&nbsp;</span>
+				<ul id="menu">
+					<li class="selected">
+						<a href="home.html">Home</a>
+					</li>
+					<li>
+						<div class="dropdown">
+							<a>Leave ▽</a>
+							<div class="dropdown-content" >
+											<hr>
+											<a href="leaverequest.html" style="margin-top:30px;margin:20px;">Leave Request</a> <br> <hr>
+											<a href="leaveapproval.html"  style="margin:20px;"> Leave Approval</a>
+											<hr>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="dropdown2">
+								<a>Attendance ▽</a>
+								<div class="dropdown-content2" >
+												<hr>
+												<a href="markattendance.html" style="margin-top:30px;margin:20px;">Mark Attendance</a> <br> <hr>
+												<a href="viewattendance.html"  style="margin:20px;">View Attendance</a>
+												<hr>
+								</div>
+						</div>
+					</li>
+					<li>
+						<a href="index.html">SIGN OUT</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="body" class="leave" >
+			<div>
+
+				<h4 >Check Attendance Till Date</h4><br><br>
+        <p id="date" style="font-size:15px;"></p>
+            <form id="leave_appr_form" action="home.html">
+                  <br><br><br>
+                  <p style="font-size:21px;" >Enter Student ID</p>
+                  <input type="text" name="username"  onfocus="this.select()" > <br>
+
+                  <br><br>
+                  <input onclick = "fetchAttendance()" type="submit" value="View Attendance" id="submit" style="width:200px;">
+                  <br><br><Br><br><br><br>
+                    <br><br>
+            </form>
+
+
+			</div>
+		</div>
+		<div id="footer">
+			<div>
+				<div class="connect">
+					<a href="https://twitter.com/home" class="twitter">twitter</a>
+					<a href="http://facebook.com" class="facebook">facebook</a>
+					<a href="http://gmail.com" class="googleplus">googleplus</a>
+					<a href="http://pinterest.com" class="pinterest">pinterest</a>
+				</div>
+				<p>&copy; 2019 by EKBAP. All rights reserved.</p>
+			</div>
+		</div>
+	</div>
+</body>
+
+
+
+
+
+</html>

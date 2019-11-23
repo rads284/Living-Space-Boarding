@@ -1,0 +1,70 @@
+
+<script>
+ var obj =
+    {
+        xhr: new XMLHttpRequest(), 
+        
+        check: function(){
+                var wid = document.getElementById("wid")
+                //console.log(this);
+                obj.xhr.onreadystatechange=this.showMsg;
+                obj.xhr.open("POST", "http://localhost:5000/approve_leave", true);//asynchronous
+                //don't add this!! This and Post should not be set together, post will set the header automatically!! obj.xhr.setRequestHeader("Content-type", " application/x-www-form-urlencoded");
+                var fd = new FormData();
+                console.log(wid.value)
+
+                fd.append("wid", wid.value);
+                obj.xhr.send(fd);
+                
+            },
+        showMsg : function(){
+                if(this.readyState == 4 && this.status == 200){
+                    document.getElementById("stat").innerHTML = this.responseText;
+                }
+        },
+    
+    
+    displayForm : function(){
+        
+    clr = document.getElementById("CLR");
+    clr.disabled = true;
+    br0 = document.createElement("br");
+   
+    br4 = document.createElement("br");
+    var t1 = document.createTextNode("Enter Warden ID:");
+    var wid = document.createElement("input"); //input element, text
+    wid.setAttribute('type',"text");
+    wid.setAttribute('id',"wid");
+    wid.required;
+    br3 = document.createElement("br");
+        
+    var submit = document.createElement("input"); //input element, Submit button
+    submit.setAttribute('type',"submit");
+    submit.setAttribute('value',"Submit");
+    submit.addEventListener("click", this.check);
+        
+    document.body.appendChild(br0);
+    document.body.appendChild(br4);
+    document.body.appendChild(t1);
+    document.body.appendChild(wid);
+    document.body.appendChild(br3);
+    document.body.appendChild(submit);
+        
+},
+        
+    
+    
+    
+}
+
+
+
+</script>
+
+
+<html>
+<!--Warden clicks on Create Leave Request button- opens up a form which has 2 fields - date and reason - on submit- /notify parent 
+need to send from , to date along with reason to parent -->
+<button id = "CLR" onclick = "obj.displayForm()">Approve Leave Request </button>
+ <p id = "stat"></p>   
+</html>

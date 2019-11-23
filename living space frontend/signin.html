@@ -1,0 +1,73 @@
+<!doctype html>
+<!-- Website template by freewebsitetemplates.com -->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sign in</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" type="text/css" href="css/mobile.css">
+	<script src="js/mobile.js" type="text/javascript"></script>
+</head>
+<body>
+	<div id="page">
+		<div id="header">
+			<div id="navigation">
+				<span id="mobile-navigation">&nbsp;</span>
+				<ul id="menu">
+					<li>
+						<a href="index.html">Home</a>
+					</li>
+
+					<li>
+						<a href="contact_us.html">Contact</a>
+						<ul>
+							<li>
+								<a href="blogsinglepost.html">blog single post</a>
+							</li>
+						</ul>
+					</li>
+					<li class="selected">
+						<a  href="signin.html">Sign in</a>
+
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="body" class="contact">
+			<div>
+
+				<!--<h4>JOIN RNRNR NOW</h4>-->
+				<h1>Enter Login Credentials</h1><br><br>
+				<form action="home.html">
+					<p>Username</p>
+					<input type="text" name="username"  onfocus="this.select()" > <br>
+					<p>Password</p>
+					<input type="password" name="password"  onfocus="this.select()" >
+					<p>Enter user type</p><br>
+					<select class="user-type">
+						<option value="warden">Warden</option>
+						<option value="parent">Parent</option>
+					</select><br><br>
+					<input onclick = "location.replace('home.html')" type="submit" value="Log In" id="submit">
+
+					<br><br><br>
+					 <p id="registernow">Not an Existing User? <a href= "register.html"> Register Now</a></p>
+					<br><br><br><br><br>
+				</form>
+			</div>
+		</div>
+		<div id="footer">
+			<div>
+				<div class="connect">
+					<a href="https://twitter.com/home" class="twitter">twitter</a>
+					<a href="http://facebook.com" class="facebook">facebook</a>
+					<a href="http://gmail.com" class="googleplus">googleplus</a>
+					<a href="http://pinterest.com" class="pinterest">pinterest</a>
+				</div>
+				<p>&copy; 2019 by EKBAP. All rights reserved.</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
