@@ -1,5 +1,4 @@
 <!doctype html>
-<!-- Website template by freewebsitetemplates.com -->
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -21,14 +20,13 @@
 </head>
 
 
-
 <body onload="displayDate()">
 	<div id="page">
 		<div id="header">
 			<div id="navigation">
 				<span id="mobile-navigation">&nbsp;</span>
 				<ul id="menu">
-					<li class="selected">
+					<li >
 						<a href="home.html">Home</a>
 					</li>
 					<li>
@@ -42,7 +40,7 @@
 							</div>
 						</div>
 					</li>
-					<li>
+					<li class="selected">
 						<div class="dropdown2">
 								<a>Attendance ▽</a>
 								<div class="dropdown-content2" >
@@ -65,18 +63,16 @@
 
 				<h4 >Check Attendance Till Date</h4><br><br>
         <p id="date" style="font-size:15px;"></p>
+
             <form id="leave_appr_form" action="home.html">
                   <br><br><br>
                   <p style="font-size:21px;" >Enter Student ID</p>
                   <input type="text" name="username"  onfocus="this.select()" > <br>
-
                   <br><br>
                   <input onclick = "fetchAttendance()" type="submit" value="View Attendance" id="submit" style="width:200px;">
                   <br><br><Br><br><br><br>
                     <br><br>
             </form>
-
-
 			</div>
 		</div>
 		<div id="footer">
@@ -92,8 +88,6 @@
 		</div>
 	</div>
 </body>
-
-
 
 
 
