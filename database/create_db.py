@@ -29,11 +29,11 @@ with open('Student.txt','r',encoding="utf8") as fin: # `with` statement availabl
 cur.executemany("INSERT INTO Student (w_id,Id,FullName,p_id) VALUES (?, ?, ?, ?);", to_db)
 con.commit()
 
-cur.execute("CREATE TABLE IF NOT EXISTS Leave (id AUTO INCREMENT,s_id,CheckIn,CheckOut,ApprovedP,ApprovedW, PRIMARY KEY(id), FOREIGN KEY(s_id) REFERENCES Student(Id) ON DELETE CASCADE ON UPDATE NO ACTION);")
+cur.execute("CREATE TABLE IF NOT EXISTS Leave (id,s_id,CheckIn,CheckOut,ApprovedP,ApprovedW, PRIMARY KEY(id), FOREIGN KEY(s_id) REFERENCES Student(Id) ON DELETE CASCADE ON UPDATE NO ACTION);")
 
-row= ('99', '19-11-2019', '21-11-2019', 'Yes', 'No')
+row= ('79485565','99', '19-11-2019', '21-11-2019', 'Yes', 'No')
 
-cur.execute("INSERT INTO Leave (s_id,CheckIn,CheckOut,ApprovedP,ApprovedW) VALUES(?,?,?,?,?);",row)
+cur.execute("INSERT INTO Leave (id,s_id,CheckIn,CheckOut,ApprovedP,ApprovedW) VALUES(?,?,?,?,?,?);",row)
 # Insert only when student is absent.
 cur.execute("CREATE TABLE IF NOT EXISTS Attendance (CDate, s_id, PRIMARY KEY(CDate,s_id), FOREIGN KEY(s_id) REFERENCES Student(Id) ON DELETE CASCADE ON UPDATE NO ACTION)")
 con.commit()
