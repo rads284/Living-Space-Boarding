@@ -6,7 +6,8 @@ from flask_cors import CORS, cross_origin
 import sqlite3
 import os
 import requests
-
+import logging
+import uuid
 '''
     Leave management - [create leave request, approve leave request]
     Leave request can be initiated by either warden or parent
@@ -34,10 +35,12 @@ app.config.update(
                  )
 mail = Mail(app)
 
+'''
 
+'''
 @app.route('/notify_parent',methods =['POST'])
 def notify_parent():#mail_id goes here
-    print(request.form)
+    logging.info(request.form)
     From = request.form.get("from", False)
     From = '-'.join(From.split('-')[::-1])
     To = request.form["to"]
@@ -45,70 +48,78 @@ def notify_parent():#mail_id goes here
     Reason = request.form["reason"]
     sid = request.form["sid"]
     
-    print(From, To, Reason)
+    logging.info(From, To, Reason)
     c.execute("SELECT FullName from Student where Id ='%s'" %sid)
     student_name = c.fetchall()[0][0]
     c.execute("SELECT Email from Parent where s_id ='%s'" %sid)
     parent_id =c.fetchall()[0][0]
-    print("Parent mail id:",parent_id)
+    logging.info("Parent mail id:",parent_id)
     #insert into Leave-sid, wid, pid, ApprovedP as yes
-    c.execute("SELECT w_id from Student where Id ='%s'" %sid)
-    wid = c.fetchall()[0][0]
-    row = (sid,wid,sid,From,To,"Yes","No")
-    print("row:",row)
-    c.execute("INSERT INTO Leave(s_id,w_id,p_id,CheckIn,CheckOut,ApprovedP) VALUES(?,?,?,?,?,?)" ,row)
+    # c.execute("SELECT w_id from Student where Id ='%s'" %sid)
+    # wid = c.fetchall()[0][0]
+    leave_id = uuid.uuid1()
+    row = (leave_id,sid,From,To,"Yes","No")
+    logging.info("row:",row)
+    c.execute("INSERT INTO Leave(id,s_id,CheckIn,CheckOut,ApprovedP) VALUES(?,?,?,?,?)" ,row)
    
     msg = Message('Leave Request Approval', sender = 'livingspaceboarding@gmail.com', recipients=[parent_id])
-    msg.body = "Dear Parent,\n\t Your ward, "+student_name+ " (Student ID: "+sid+") has raised a leave application from "+ From+" to "+To+ " for the following reason: "+Reason+". Kindly click on the following link to approve the Leave Request : https://LivingSpaceBoarding/LeaveApprove/\n\n Regards,\nLivingSpaceBoarding"
+    msg.body = "Dear Parent,\n\t Your ward, "+student_name+ " (Student ID: "+sid+") has raised a leave application from "+ From+" to "+To+ " for the following reason: "+Reason+". Kindly click on the following link to approve the Leave Request : https://LivingSpaceBoarding/LeaveApprove/"+str(leave_id)+"\n\n Regards,\nLivingSpaceBoarding"
     mail.send(msg)
     return "Message Sent!" #render some page here
     
 @app.route('/notify_warden',methods =['POST'])
-def notify_warden():#mail)id goes here
+def notify_warden():
+    #mail)id goes here
     #retrieve warden id from db
-    print(print(request.form))
+    logging.info(request.form)
+    
     sid = request.form["sid"]
     c.execute("SELECT FullName from Student where Id ='%s'" %sid)
     student_name = c.fetchall()[0][0]
-    print(student_name)
+    logging.info(student_name)
+
     From = request.form.get("from", False)
     From = '-'.join(From.split('-')[::-1])
+    
     To = request.form["to"]
     To = '-'.join(To.split('-')[::-1])
+    
     Reason = request.form["reason"]
     c.execute("SELECT w_id from Student where Id ='%s'" %sid)
     l=c.fetchall()
     wid = l[0][0]
     c.execute("SELECT Email from Warden where Id ='%s'" %wid)
     warden_id = c.fetchall()[0][0]
-    print("Warden mail Id:",warden_id)
+    logging.info("Warden mail Id:",warden_id)
     #insert into Leave
-    row = (sid,wid,sid,From,To,"Yes")
-    c.execute("INSERT INTO Leave(s_id,w_id,p_id,CheckIn,CheckOut,ApprovedW) VALUES(?,?,?,?,?,?)" ,row)
+    leave_id = 'fjdaj'
+    row = ('893490',sid,From,To,"Yes")
+    c.execute("INSERT INTO Leave(id,s_id,CheckIn,CheckOut,ApprovedW) VALUES(?,?,?,?,?)" ,row)
     msg = Message('Leave Request Approval', sender = 'livingspaceboarding@gmail.com', recipients=[warden_id])
-    msg.body =  "Dear Warden,\n\t Parent of " + student_name + " (Student ID: "+sid+")  has raised a leave application from "+ From+" to "+To+ " for the following reason: "+Reason+". Kindly click on the following link to approve the Leave Request : https://LivingSpaceBoarding/LeaveApprove/"
+    msg.body =  "Dear Warden,\n\t Parent of " + student_name + " (Student ID: "+sid+")  has raised a leave application from "+ From+" to "+To+ " for the following reason: "+Reason+". Kindly click on the following link to approve the Leave Request : https://LivingSpaceBoarding/LeaveApprove/"+leave_id
     mail.send(msg)
     return "Message Sent!" #render some page here
     
-@app.route('/approve_leave',methods =['POST'])
-def approve_leave(): #has to be directed here for both warden and parent
+@app.route('/approve_leave',methods =['PUT'])
+def approve_leave(): 
+    #has to be directed here for both warden and parent
     #otp?
     #update db-(id,s_id,w_id,p_id,CheckIn,CheckOut,ApprovedP,ApprovedW, PRIMARY KEY(id)
     #if parent approves
-    print(request.form)
+    logging.info(request.form)
     if(request.form.get("pid",False) == False):#means warden approved
-        print("Warden Approved")
+        logging.info("Warden Approved")
         wid = request.form["wid"]
         c.execute("UPDATE  Leave SET ApprovedW='Yes' where w_id ='%s'" %wid)
     else:
-        print("Parent Approved")
+        logging.info("Parent Approved")
         pid = request.form["pid"]
         c.execute("UPDATE  Leave SET ApprovedP='Yes' where p_id ='%s'" %pid)
     return "Leave Approved!"
 
 
 if __name__ == '__main__':
-    app.run(debug = True,host='0.0.0.0',port=80)
+    app.run(debug = True,host='0.0.0.0',port=8000)
 
 '''
 For testing: Student id 99- parent:preet, warden: rasya
