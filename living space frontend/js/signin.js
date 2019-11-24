@@ -1,4 +1,6 @@
-function ValidateEmail() 
+
+
+function ValidateEmail()
 {
 	var x = document.forms["signin"]["username"].value;
 	if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(x))
@@ -11,7 +13,7 @@ function ValidateEmail()
 		document.getElementById("usernameerror").style.display = "block";
 		return (false);
 	}
-	
+
 }
 function ValidatePassword()
 {
@@ -25,3 +27,15 @@ function ValidatePassword()
 	return false;
 	}
 }
+
+$('form').submit(function(){
+	alert("njdnvdm");
+	$.post("http://localhost:5000/login",{
+		username:$('#username').val(),
+		password:$('#password').val(),
+		usertype:$('#usertype').val()
+	},
+	function(data){
+		console.log(data);
+	});
+});
