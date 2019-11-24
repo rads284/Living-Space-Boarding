@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>hi</title>
+</head>
+<body>
+{% if current_user.is_authenticated %}
+  Hi {{ current_user.name }}!
+{% endif %}
+</body>
+</html>
