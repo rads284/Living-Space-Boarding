@@ -38,8 +38,12 @@
 	            },
 	        showMsg : function(){
 	                if(this.readyState == 4 && this.status == 200){
+											window.location.replace("home.html");
 	                    document.getElementById("stat").innerHTML = this.responseText;
 	                }
+									else{
+										alert("Error");
+									}
 	        },
 
 
