@@ -11,10 +11,36 @@
       {
         n =  new Date();
         y = n.getFullYear();
-        m = n.getMonth();
+        m = n.getMonth()+1;
         d = n.getDate();
         document.getElementById("date").innerHTML = "Date:  "+ d + " / " + m + " / " + y;
       }
+
+        var server_addr="http://127.0.0.1:5000"
+          var route="/viewattendance?id="
+          function fetchAttendance() {
+              console.log('hello world');
+              //alert(data_file);
+              var http_request = new XMLHttpRequest();
+              //var params="username="+document.getElementById("username").value+"&actid="+document.getElementById("actId").value+"&category="+document.getElementById("category").value+"&timestamp="+document.getElementById("timestamp").value+"&caption="+document.getElementById("caption").value+"&imgB64="+document.getElementById("imgB64").value ;
+              var username= document.getElementById("id").value;
+              // var password= document.getElementById("password").value;
+              var data_file = server_addr+route+username;
+              console.log(data_file)
+              //alert(params);
+            //  var form = document.createElement("form");
+              http_request.onreadystatechange = function() {//Call a function when the state changes.
+                  if(http_request.readyState == 4) {
+                      // var jsonObj = JSON.parse(http_request.responseText);
+                      body=document.getElementById("body");
+                      p = document.createElement('p');
+                      p.innerHTML=http_request.responseText;
+                      body.appendChild(p);
+                  }
+              }
+              http_request.open('GET', data_file, true);
+              http_request.send();
+          }
   </script>
 
 </head>
@@ -64,12 +90,12 @@
 				<h4 >Check Attendance Till Date</h4><br><br>
         <p id="date" style="font-size:15px;"></p>
 
-            <form id="leave_appr_form" action="home.html">
+            <form id="leave_appr_form">
                   <br><br><br>
                   <p style="font-size:21px;" >Enter Student ID</p>
-                  <input type="text" name="username"  onfocus="this.select()" > <br>
+                  <input type="text" name="id" id="id"  onfocus="this.select()" > <br>
                   <br><br>
-                  <input onclick = "fetchAttendance()" type="submit" value="View Attendance" id="submit" style="width:200px;">
+                  <input onclick = "fetchAttendance()" type="button" value="View Attendance" id="submit" style="width:200px;">
                   <br><br><Br><br><br><br>
                     <br><br>
             </form>

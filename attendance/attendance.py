@@ -47,6 +47,7 @@ def markattendance():
 @app.route("/viewattendance", methods=['GET'])
 def viewattendance():
 	if(request.method == 'GET'):
+		app.logger.info(request.args)
 		ID=request.args.get('id',type=str)
 		c = con.cursor()
 		name = c.execute("SELECT FullName FROM Student WHERE Id = (?);", (ID,))
@@ -71,7 +72,7 @@ def viewattendance():
 		return "", 405
 
 if __name__ == '__main__':
-	app.run( debug=False,
+	app.run( debug=True,
             host=os.getenv('LISTEN', '127.0.0.1'),
             port=int(os.getenv('PORT', '5000'))
             )
