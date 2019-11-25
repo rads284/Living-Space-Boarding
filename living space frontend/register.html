@@ -13,7 +13,16 @@
 	<script src="js/urls.js" type="text/javascript"></script>
 </head>
 <script type="text/javascript" >
-		function ajaxreq(){
+	function ajaxreq1 (){
+		p =document.createElement('p');
+		p.innerHTML = '<p>Enter OTP</p> <input type="text" name="otp" id="otp" onfocus="this.select()" style="width:350px" required> <input type="button" value="Register" id="submit" onclick="ajaxreq()" >'
+		body= document.getElementById("reg_form");
+		body.appendChild(p);
+
+ 
+
+	}
+	function ajaxreq(){
 	$.ajax({
     method: 'POST',
     url: URL.registerURL, // link to your PHP file
@@ -59,7 +68,7 @@
 			<div>
 
 				<h4>Join Now</h4>
-				<form  name="registerform" method="post">
+				<form  name="registerform" method="post" id="reg_form">
 					<!--<p>Enter user type</p><br>
 					<select class="user-type">
 					  <option value="warden">Warden</option>
@@ -81,7 +90,7 @@
 					<input type="tel" name="full-name"  id="full-name" onfocus="this.select()" required>
 					<p id="mobileerror" style="display: none;"></p>
 					<br>
-					<input type="button" value="Register" id="submit" onclick="ajaxreq()">
+					<input type="button" value="Get OTP" id="submit" onclick="ajaxreq1()">
 				</form>
 			</div>
 		<br>
