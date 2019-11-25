@@ -1,3 +1,4 @@
+    <script src="js/urls.js" type="text/javascript"></script>
 
 <script>
  var obj =
@@ -52,7 +53,7 @@
                     }
                 //console.log(this);
                 obj.xhr.onreadystatechange=this.showMsg;
-                obj.xhr.open("POST", "http://localhost:5000/notify_warden", true);//asynchronous
+                obj.xhr.open("POST", URL.leaverequestwardenURL, true);//asynchronous
                 //don't add this!! This and Post should not be set together, post will set the header automatically!! obj.xhr.setRequestHeader("Content-type", " application/x-www-form-urlencoded");
                 var fd = new FormData();
                 console.log(from,to,reason.value)
