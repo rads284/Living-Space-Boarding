@@ -3,6 +3,18 @@ font-family: "VisbyCF-Heavy";
 src: url("css/fonts/VisbyCF-Heavy.eot");
 src: url("css/fonts/VisbyCF-Heavy.woff") format("woff");
 }
+
+input[type="date"]::-webkit-inner-spin-button{
+    display: none;
+    -webkit-appearance: none;
+}
+input[type=date]::-webkit-calendar-picker-indicator{
+    -webkit-appearance: none;
+    display: block;
+		cursor: pointer;
+		background-color:none;
+}
+
 #dates_list {
 	color: #FFFFFF;
 	font-family: Arial;
@@ -277,7 +289,8 @@ img {
 }
 /*----------------------------------------body-home-styles---------------------------------------*/
 #body {
-	background: url(../images/school-bg.jpg) repeat center top;
+	background: url(../images/kids2.jpg) repeat center top;
+	background-size: 100%;
 	border-top: 2px solid #252525;
 	margin: 0;
 	overflow: hidden;
@@ -312,6 +325,7 @@ img {
 	text-align: center;
 	text-transform: uppercase;
 	width: 100%; /*89.5833%;*/
+	 text-shadow: 2px 1px 3px rgb(0,0,0,0.5);
 }
 #body.home div.header div span {
 	display: block;

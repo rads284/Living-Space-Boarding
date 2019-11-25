@@ -19,7 +19,7 @@
 		body= document.getElementById("reg_form");
 		body.appendChild(p);
 
- 
+
 
 	}
 	function ajaxreq(){
@@ -37,6 +37,8 @@
     success: function(data) {
         // we can find any data on external url, cause we've got all page
        	console.log(data);
+				alert("Registration successful");
+				window.location.replace("http://localhost/home.html");
     },
     error:function() {
         console.log('Error');
