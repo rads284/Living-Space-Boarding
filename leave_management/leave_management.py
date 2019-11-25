@@ -135,7 +135,7 @@ def approve_leave():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='localhost', port=8000)
+    app.run(debug=True, host='0.0.0.0', port=8000)
 
 '''
 For testing: Student id 99- parent:preet, warden: rasya

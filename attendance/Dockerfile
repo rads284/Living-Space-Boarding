@@ -3,5 +3,5 @@ COPY requirements.txt /
 RUN pip install -r requirements.txt
 ADD . /attendance
 WORKDIR /attendance
-EXPOSE 5000
+EXPOSE 8000
 CMD ["python","attendance.py"]
