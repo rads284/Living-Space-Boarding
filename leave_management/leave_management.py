@@ -50,19 +50,19 @@ def create_leave(from_t, to_t, reason, sid, w_app="No", p_app="No"):
     c.execute("INSERT INTO Leave(id,s_id,CheckIn,CheckOut,ApprovedW,ApprovedP) VALUES(?,?,?,?,?,?)", row)
     return leave_id
 
+
 OTP = 0000
 
-@app.route('/verify_otp',methods=['POST'])
+
+@app.route('/verify_otp', methods=['POST'])
 def verify_otp():
     otp = request.form.get("otp")
     leaveid = request.form["leaveid"]
     global OTP
-    print(otp)
-    print(OTP)
-    if(OTP==int(otp)):
-        return "Success",200
+    if(OTP == int(otp)):
+        return "Success", 200
     else:
-        return "Failure",400
+        return "Failure", 400
 
 
 @app.route('/notify_parent', methods=['POST'])
@@ -74,12 +74,15 @@ def notify_parent():
         to_t = request.form["to"]
         reason = request.form["reason"]
         sid = request.form["sid"]
+        wid = request.form["id"]
     except Exception as e:
         return BadRequest("The data provided is invalid")
+    w_id = c.execute("SELECT w_id from Student where Id = '%s'" % sid)
+    if(not(w_id == wid)):
+        return make_response("Integrity Error", 400)
     leave_id = create_leave(from_t, to_t, reason, sid, "Yes")
     global OTP
-    OTP = random.randint(1000,9999)
-
+    OTP = random.randint(1000, 9999)
     c.execute("SELECT Email from Parent where Id = ( SELECT p_id from Student where Id = '%s')" % sid)
     parent_id = c.fetchone()[0]
     c.execute("SELECT FullName from Student where Id ='%s'" % sid)
@@ -101,15 +104,18 @@ def notify_warden():
         to_t = request.form["to"]
         reason = request.form["reason"]
         sid = request.form["sid"]
+        pid = request.form["id"]
     except Exception as e:
         return BadRequest("The data provided is invalid")
+    p_id = c.execute("SELECT p_id from Student where Id = '%s'" % sid)
+    if(not(p_id == pid)):
+        return make_response("Integrity Error", 400)
     c.execute("SELECT Email from Warden where Id = (SELECT w_id from Student where Id = '%s')" % sid)
     warden_id = c.fetchone()[0]
     logging.info("Warden mail Id:", warden_id)
     c.execute("SELECT FullName from Student where Id ='%s'" % sid)
     student_name = c.fetchone()[0]
-    # insert into Leave
-    OTP = random.randint(1000,9999)
+    OTP = random.randint(1000, 9999)
     leave_id = create_leave(from_t, to_t, reason, sid, p_app="Yes")
     leave_url = "https://LivingSpaceBoarding/LeaveApprove/?leave_id=" + leave_id
     msg = Message('Leave Request Approval', sender='livingspaceboarding@gmail.com', recipients=[warden_id])
@@ -132,6 +138,25 @@ def approve_leave():
     else:
         c.execute("UPDATE  Leave SET ApprovedP='Yes' where Id ='%s'" % leave_id)
     return "Leave Approved!"
+
+
+@app.route('/get_s_names/<id>/<utype>', methods=['GET'])
+def get_s_names(id, utype):
+    if(utype == 'warden'):
+        c.execute("SELECT FullName from Student where w_id = '%s'" % id)
+    else:
+        c.execute("SELECT FullName from Student where p_id = '%s'" % id)
+    s_names = c.fetchall()
+    return json.dumps(s_names)
+
+@app.route('/get_leaves/<id>/<utype>', methods=['GET'])
+def get_leaves(id, utype):
+    if(utype == 'warden'):
+        c.execute("SELECT * from leave where s_id = (SELECT s_id from Warden where w_id = '%s')" % id)
+    else:
+        c.execute("SELECT * from leave where s_id = (SELECT s_id from Parent where p_id = '%s')" % id)
+    leave_details = c.fetchall()
+    return json.dumps(leave_details)
 
 
 if __name__ == '__main__':

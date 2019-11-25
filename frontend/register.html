@@ -19,7 +19,7 @@
 		body= document.getElementById("reg_form");
 		body.appendChild(p);
 
- 
+
 
 	}
 	function ajaxreq(){
@@ -37,6 +37,8 @@
     success: function(data) {
         // we can find any data on external url, cause we've got all page
        	console.log(data);
+				alert("Registration successful");
+				window.location.replace("http://localhost/home.html");
     },
     error:function() {
         console.log('Error');
@@ -90,19 +92,10 @@
 					<input type="tel" name="full-name"  id="full-name" onfocus="this.select()" required>
 					<p id="mobileerror" style="display: none;"></p>
 					<br>
-					<input type="button" value="Get OTP" id="submit" onclick="ajaxreq1()">
+					<input type="button" value="Get OTP" id="submit" onclick="ajaxreq1()"><br><br>
 				</form>
 			</div>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
+
 		</div>
 
 		<div id="footer">

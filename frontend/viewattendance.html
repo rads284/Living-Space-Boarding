@@ -16,7 +16,7 @@
         document.getElementById("date").innerHTML = "Date:  "+ d + " / " + m + " / " + y;
       }
 
-        var server_addr="http://127.0.0.1:8003"
+        var server_addr="http://0.0.0.0:8000/"
           var route="/viewattendance?id="
           function fetchAttendance() {
               console.log('hello world');
@@ -42,14 +42,14 @@
                       	p.innerHTML = l[0];
                       	body.appendChild(p);
                       }
-                      else 
+                      else
                       {
 		                      p.innerHTML= "<p> Name : " +l[0]+"  <br>   " + " Student ID : " +l[1]+" </p> " ;
 		                      absent = document.createElement('p');
 		                      absent.appendChild(p);
 
 		                      dates_list = document.createElement('ul');
-		                      
+
 		                      dates_list.id = "dates_list";
 		                      if (l.length==2)
 		                      {
@@ -73,10 +73,10 @@
 		                      }
 		                      body.appendChild(absent);
 
-		                      
+
 
                       }
-                      
+
                   }
               }
               http_request.open('GET', data_file, true);
@@ -132,11 +132,11 @@
         <p id="date" style="font-size:15px;"></p>
 
             <form id="leave_appr_form">
-                  
+
                   <p style="font-size:21px;" >Enter Student ID</p>
                   <input type="text" name="id" id="id"  onfocus="this.select()" > <br>
                   <br><br>
-                  <input onclick = "fetchAttendance()" type="button" value="View Attendance" id="submit" style="width:200px;margin-bottom: 20px;">
+                  <input onclick = "fetchAttendance();" type="button" value="View Attendance" id="submit" style="width:200px;margin-bottom: 20px;">
                   <div id="dispAtt">
 
 
