@@ -10,6 +10,7 @@ import time
 import requests
 import logging
 import uuid
+import random
 from werkzeug.exceptions import BadRequest
 '''
     Leave management - [create leave request, approve leave request]
@@ -24,7 +25,7 @@ from werkzeug.exceptions import BadRequest
 app = Flask(__name__)
 
 CORS(app, support_credentials=True)
-conn = sqlite3.connect('livingspace.db', check_same_thread=False)
+conn = sqlite3.connect('../database/livingspace.db', check_same_thread=False)
 # conn.execute("PRAGMA foreign_keys = ON")
 c = conn.cursor()
 '''
@@ -49,10 +50,25 @@ def create_leave(from_t, to_t, reason, sid, w_app="No", p_app="No"):
     c.execute("INSERT INTO Leave(id,s_id,CheckIn,CheckOut,ApprovedW,ApprovedP) VALUES(?,?,?,?,?,?)", row)
     return leave_id
 
+OTP = 0000
+
+@app.route('/verify_otp',methods=['POST'])
+def verify_otp():
+    otp = request.form.get("otp")
+    leaveid = request.form["leaveid"]
+    global OTP
+    print(otp)
+    print(OTP)
+    if(OTP==int(otp)):
+        return "Success",200
+    else:
+        return "Failure",400
+
 
 @app.route('/notify_parent', methods=['POST'])
 def notify_parent():
     logging.info(request.form)
+    print(request.form)
     try:
         from_t = request.form.get("from", False)
         to_t = request.form["to"]
@@ -61,13 +77,16 @@ def notify_parent():
     except Exception as e:
         return BadRequest("The data provided is invalid")
     leave_id = create_leave(from_t, to_t, reason, sid, "Yes")
+    global OTP
+    OTP = random.randint(1000,9999)
+
     c.execute("SELECT Email from Parent where Id = ( SELECT p_id from Student where Id = '%s')" % sid)
     parent_id = c.fetchone()[0]
     c.execute("SELECT FullName from Student where Id ='%s'" % sid)
     student_name = c.fetchone()[0]
     leave_url = "https://LivingSpaceBoarding/LeaveApprove/?leave_id=" + leave_id
     msg = Message('Leave Request Approval', sender='livingspaceboarding@gmail.com', recipients=[parent_id])
-    msg.body = "Dear Parent,\n\t Your ward, " + student_name + " (Student ID: " + sid + ") has raised a leave application from " + from_t + " to " + to_t + " for the following reason: " + reason + ". Kindly click on the following link to approve the Leave Request : " + leave_url + "\n\n Regards,\nLivingSpaceBoarding"
+    msg.body = "Dear Parent,\n\t Your ward, " + student_name + " (Student ID: " + sid + ") has raised a leave application from " + from_t + " to " + to_t + " for the following reason: " + reason + ". Kindly click on the following link to approve the Leave Request : " + leave_url +  "\nYOUR OTP IS : "+ str(OTP) + "\n\n Regards,\nLivingSpaceBoarding" 
     try:
         mail.send(msg)
     except Exception as e:
@@ -90,10 +109,11 @@ def notify_warden():
     c.execute("SELECT FullName from Student where Id ='%s'" % sid)
     student_name = c.fetchone()[0]
     # insert into Leave
+    OTP = random.randint(1000,9999)
     leave_id = create_leave(from_t, to_t, reason, sid, p_app="Yes")
     leave_url = "https://LivingSpaceBoarding/LeaveApprove/?leave_id=" + leave_id
     msg = Message('Leave Request Approval', sender='livingspaceboarding@gmail.com', recipients=[warden_id])
-    msg.body = "Dear Warden,\n\t Parent of " + student_name + " (Student ID: " + sid+")  has raised a leave application from " + from_t + " to " + to_t + " for the following reason: " + reason + ". Kindly click on the following link to approve the Leave Request : " + leave_url
+    msg.body = "Dear Warden,\n\t Parent of " + student_name + " (Student ID: " + sid+")  has raised a leave application from " + from_t + " to " + to_t + " for the following reason: " + reason + ". Kindly click on the following link to approve the Leave Request : " + leave_url + "\nYOUR OTP IS : "+ str(OTP)
     try:
         mail.send(msg)
     except Exception as e:
@@ -115,7 +135,7 @@ def approve_leave():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=8000)
+    app.run(debug=True, host='localhost', port=8000)
 
 '''
 For testing: Student id 99- parent:preet, warden: rasya

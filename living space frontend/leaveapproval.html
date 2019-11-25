@@ -5,7 +5,48 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Leave Apprval</title>
 	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 	<script>
+		function signout(){
+			localStorage.setItem("logged","false");
+			window.location.replace("home.html")
+		}
+		window.onload = function(){
+			if(window.location.search!=""){
+				var leaveid = window.location.search.slice(9);
+				console.log(leaveid);
+
+				document.getElementById("leaveid").value = leaveid;
+			}
+		}
+
+	function ajaxreq(){
+	$.ajax({
+    method: 'POST',
+    url: 'http://localhost:8000/verify_otp', // link to your PHP file
+   
+    data: {
+        // url where our server will send request which can't be done by AJAX
+        otp:$('#otp').val(),
+		leaveid:$('#leaveid').val()
+    },
+    success: function(data) {
+        // we can find any data on external url, cause we've got all page
+       	console.log(data);
+       	if(data=="Success"){
+       		//Render SUCCESS
+       	}
+       	else{
+       		//Render FAILURE
+       	}
+    },
+    error:function() {
+        console.log('Error');
+    }
+});
+}
+
 	     var server_addr="http://192.168.43.26:8080"
 	     var obj =
 	    {
@@ -103,7 +144,7 @@
 						</div>
 					</li>
 					<li>
-						<a href="index.html">SIGN OUT</a>
+						<a  onclick="signout()">SIGN OUT</a>
 					</li>
 				</ul>
 			</div>
@@ -112,13 +153,13 @@
 			<div>
 
 				<h4>Leave Approval - Enter Details</h4><br><br>
-				<form id="leave_appr_form" action="home.html">
+				<form id="leave_appr_form">
 					<p>Parent/Warden ID</p>
-					<input type="text" name="username"  onfocus="this.select()" > <br>
+					<input type="text" name="username" id="leaveid" onfocus="this.select()" > <br>
 					<p>OTP</p>
-				  <input type="text" name="username"  onfocus="this.select()" > <br>
+				  <input type="text" name="username" id="otp" onfocus="this.select()" > <br>
 			 		<br><br><br><br>
-					<input onclick = "location.replace('home.html')" type="submit" value="Submit" id="submit">
+					<button onclick = "ajaxreq()" type="button" value="Submit" id="submit">
 					<br><br><br>
 				</form>
 			</div>

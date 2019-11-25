@@ -1,11 +1,16 @@
 from flask import Flask, Response, redirect, url_for, request, session, abort, render_template
 from flask_login import LoginManager, UserMixin, \
                                 login_required, login_user, logout_user 
+from flask_cors import CORS
 import sqlite3
+from flask import jsonify
 app = Flask(__name__)
 conn = sqlite3.connect('livingspace.db', check_same_thread=False)
 c = conn.cursor()
 # config
+
+app = Flask(__name__)
+CORS(app)
 app.config.update(
     DEBUG = True,
     SECRET_KEY = 'secret_xxx'
@@ -47,6 +52,7 @@ def login():
         username = request.form['username']
         password = request.form['password']
         usertype = request.form['usertype']
+        print(username,password)
         if(usertype == "warden"):
             c.execute("SELECT Password from Warden where Email ='%s'" %username)
         else:
@@ -60,7 +66,7 @@ def login():
             return "asas"
             # return redirect(request.args.get("next"))
         else:
-            return abort(401)
+            return jsonify("wrong pass"),400
     else:
         return Response('''
         <form action="" method="post">

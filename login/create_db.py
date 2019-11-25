@@ -8,8 +8,10 @@ cur.execute("CREATE TABLE IF NOT EXISTS Warden (FullName,Id,PhoneNumber,Password
 with open('Warden.txt','r',encoding="utf8") as fin: 
     dr = csv.DictReader(fin) # comma is default delimiter
     to_db = [(i['FullName'], i['Id'],i['PhoneNumber'],i['Password'],i['Email']) for i in dr]
-cur.executemany("INSERT INTO Warden (FullName,Id,PhoneNumber,Password,Email) VALUES (?, ?, ?, ?, ?);", to_db)
-con.commit()
+    print("HELL")
+
+# cur.executemany("INSERT INTO Warden (FullName,Id,PhoneNumber,Password,Email) VALUES (?, ?, ?, ?, ?);", to_db)
+# con.commit()
 # cur = con.cursor()
 # cur.execute("SELECT * FROM user;")
 # print(cur.fetchone  ())

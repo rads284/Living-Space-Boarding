@@ -5,8 +5,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Leave Request</title>
 	<link rel="stylesheet" href="css/style.css" type="text/css">
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script>
+		function signout(){
+			localStorage.setItem("logged","false");
+			window.location.replace("home.html")
+		}
+
 	 var obj =
 	    {
 	        xhr: new XMLHttpRequest(),
@@ -19,7 +24,7 @@
 	                var sid = document.getElementById("sid")
 	                //console.log(this);
 	                obj.xhr.onreadystatechange=this.showMsg;
-	                obj.xhr.open("POST", "http://localhost:5000/notify_parent", true);//asynchronous
+	                obj.xhr.open("POST", "http://localhost:8000/notify_parent", true);//asynchronous
 	                //don't add this!! This and Post should not be set together, post will set the header automatically!! obj.xhr.setRequestHeader("Content-type", " application/x-www-form-urlencoded");
 	                var fd = new FormData();
 	                console.log(from.value,to.value,reason.value)
@@ -90,6 +95,28 @@
 
 	  },
 	}
+	
+	function ajaxreq(){
+	$.ajax({
+    method: 'POST',
+    url: 'http://localhost:8000/notify_parent', // link to your PHP file
+   
+    data: {
+        // url where our server will send request which can't be done by AJAX
+        from:$('#start').val(),
+		to:$('#end').val(),
+		reason:$('#reason').val(),
+		sid:$('#sid').val()
+    },
+    success: function(data) {
+        // we can find any data on external url, cause we've got all page
+       	console.log(data);
+    },
+    error:function() {
+        console.log('Error');
+    }
+});
+}
 	</script>
 </head>
 
@@ -126,7 +153,7 @@
 											</div>
 										</li>
 										<li>
-											<a href="index.html">SIGN OUT</a>
+											<a onclick="signout()">SIGN OUT</a>
 										</li>
 									</ul>
 			</div>
@@ -135,17 +162,17 @@
 			<div>
 
 				<h4>Enter Leave Request Details:</h4><br><br>
-				<form id="leave_req_form" action="home.html">
+				<form id="leave_req_form">
 					<p>Student ID</p>
-					<input type="text" name="username"  onfocus="this.select()" > <br>
+					<input type="text" name="username" id="sid" onfocus="this.select()" > <br>
 					  <p>From</p>
-					 <input type="date" class="datetype" name="startdate"  value="2019-11-22">
+					 <input type="date" class="datetype" id="start" name="startdate"  value="2019-11-22">
 						<p> To </p>
-						<input type="date" class="datetype" name="enddate"  value="2019-11-22"><br><br>
+						<input type="date" class="datetype" name="enddate" id="end" value="2019-11-22"><br><br>
 						<p> Reason:</P>
-						<textarea name="reason" rows="7" cols="50" name="comment" form="leave_req_form"></textarea>
+						<textarea name="reason" rows="7" cols="50" id="reason" name="comment" form="leave_req_form"></textarea>
 						<br><br><br><br>
-						<input onclick = "location.replace('home.html')" type="submit" value="Submit" id="submit">
+						<input onclick = "ajaxreq()" type="button" value="Submit" id="submit">
 
 
 					<br><br><br>

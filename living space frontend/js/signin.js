@@ -28,14 +28,3 @@ function ValidatePassword()
 	}
 }
 
-$('form').submit(function(){
-	alert("njdnvdm");
-	$.post("http://localhost:5000/login",{
-		username:$('#username').val(),
-		password:$('#password').val(),
-		usertype:$('#usertype').val()
-	},
-	function(data){
-		console.log(data);
-	});
-});

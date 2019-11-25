@@ -3,11 +3,16 @@ import csv, sqlite3
 con = sqlite3.connect("livingspace.db")
 cur = con.cursor()
 cur.execute('PRAGMA foreign_keys = ON')
+cur.execute("DROP TABLE Warden");
+cur.execute("DROP TABLE Student");
+cur.execute("DROP TABLE Parent");
+cur.execute("DROP TABLE Leave");
 
 cur.execute("CREATE TABLE IF NOT EXISTS Warden (FullName,Id,PhoneNumber,Password,Email, PRIMARY KEY(Id));") # use your column names here
 with open('Warden.txt','r',encoding="utf8") as fin: 
     dr = csv.DictReader(fin) # comma is default delimiter
     to_db = [(i['FullName'], i['Id'],i['PhoneNumber'],i['Password'],i['Email']) for i in dr]
+    print(to_db)
 cur.executemany("INSERT INTO Warden (FullName,Id,PhoneNumber,Password,Email) VALUES (?, ?, ?, ?, ?);", to_db)
 con.commit()
 # cur = con.cursor()
