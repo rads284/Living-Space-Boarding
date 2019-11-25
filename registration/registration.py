@@ -1,4 +1,3 @@
-from pymongo import MongoClient
 from flask import Flask, request, jsonify
 import sqlite3,json
 from flask import Response

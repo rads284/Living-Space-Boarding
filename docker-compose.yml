@@ -1,0 +1,30 @@
+version: '3'
+services:
+  frontend:
+    build: .
+    ports:
+    - "80:80"
+  register:
+    build: registration/.
+    ports:
+    - "8000:8000"
+    volumes:
+    - ./database:/database
+  login:
+    build: login/.
+    ports:
+    - "8001:8000"
+    volumes:
+    - ./database:/database
+  leave:
+    build: leave_management/.
+    ports:
+    - "8002:8000"
+    volumes:
+    - ./database:/database
+  attendance:
+    build: attendance/.
+    ports:
+    - "8003:8000"
+    volumes:
+    - ./database:/database

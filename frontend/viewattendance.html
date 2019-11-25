@@ -16,7 +16,7 @@
         document.getElementById("date").innerHTML = "Date:  "+ d + " / " + m + " / " + y;
       }
 
-        var server_addr="http://127.0.0.1:5000"
+        var server_addr="http://127.0.0.1:8003"
           var route="/viewattendance?id="
           function fetchAttendance() {
               console.log('hello world');
@@ -42,9 +42,6 @@
                       	p.innerHTML = l[0];
                       	body.appendChild(p);
                       }
-                 
-
-
                       else 
                       {
 		                      p.innerHTML= "<p> Name : " +l[0]+"  <br>   " + " Student ID : " +l[1]+" </p> " ;
