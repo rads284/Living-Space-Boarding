@@ -18,7 +18,7 @@
         getstudents();
       }
 
-          var server_addr="http://127.0.0.1:5000"
+          var server_addr="http://localhost:8003"
           var route="/markattendance"
           function getstudents() {
               console.log('hello world');
@@ -98,10 +98,14 @@
                       var res = http_request.responseText;
                   }
               }
-              http_request.open('POST', data_file, true);
+              http_request.open('PUT', data_file, true);
               http_request.setRequestHeader('Content-type','application/json; charset=utf-8');
               http_request.send(res);
+              //alert("attendance marked");
+              //location.replace("home.html");
           }
+
+
   </script>
 
 
@@ -196,7 +200,7 @@
 
               </table>
               <br><br><br>
-              <input onclick = "markattendance()" type="button" value="Submit" id="submit" class="attendanceSub" style="display:block">
+              <input onclick = "markattendance()" type="button" value="Submit" id="submit" class="attendanceSub" style="display:block;width:143px;margin-bottom:100px;">
 
           </form>
 

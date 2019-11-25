@@ -3,6 +3,36 @@ font-family: "VisbyCF-Heavy";
 src: url("css/fonts/VisbyCF-Heavy.eot");
 src: url("css/fonts/VisbyCF-Heavy.woff") format("woff");
 }
+#dates_list {
+	color: #FFFFFF;
+	font-family: Arial;
+	font-size: 16px;
+	font-weight: normal;
+	letter-spacing: 0.01em;
+	line-height: 48px;
+	padding: 0;
+	text-align: center;
+	width: auto;
+	text-decoration: none;
+	padding-left: 200px;
+	align-content: center;
+
+}
+#dates_list li {
+	background: none;
+	color: #FFFFFF;
+	width: 100%;
+	display: table;
+	font-family: Arial;
+	font-size: 18px;
+	height: 43px;
+	line-height: 43px;
+	margin: 0 auto 0px;
+	text-align: center;
+	border: none;
+}
+
+
 .dropdown {
   display: inline-block;
 }
@@ -141,7 +171,7 @@ src: url("css/fonts/VisbyCF-Heavy.woff") format("woff");
 #body.leave div h4 {
 	background: url(../images/bg-border1.gif) no-repeat center bottom;
 	color: #FFFFFF;
-	font-family: 'Arial Black';
+	font-family: 'Arial Black' ,'Arial Bold', Gadget, sans-serif;
 	font-size: 30px;
 	font-weight: normal;
 	line-height: 30px;
@@ -247,7 +277,7 @@ img {
 }
 /*----------------------------------------body-home-styles---------------------------------------*/
 #body {
-	background: url(../images/school-bg.jpg) no-repeat center top;
+	background: url(../images/school-bg.jpg) repeat center top;
 	border-top: 2px solid #252525;
 	margin: 0;
 	overflow: hidden;
@@ -273,7 +303,7 @@ img {
 	background: none;
 	color: white;
 	display: block;
-	font-family: 'Arial Black';
+	font-family: 'Arial Black' ,'Arial Bold', Gadget, sans-serif;
 	font-size: 90px;
 	font-weight: normal;
 	line-height: 96px;
@@ -346,7 +376,7 @@ img {
 #body.home div.body div h1 {
 	background: url(../images/bg-border1.gif) no-repeat center bottom;
 	color: #FFFFFF;
-	font-family: 'Arial Black';
+	font-family: 'Arial Black' ,'Arial Bold', Gadget, sans-serif;
 	font-size: 40px;
 	font-weight: normal;
 	line-height: 40px;
@@ -386,7 +416,7 @@ img {
 	border: 5px solid #FFFFFF;
 	color: #FFFFFF;
 	display: block;
-	font-family: 'Arial Black';
+	font-family: 'Arial Black' ,'Arial Bold', Gadget, sans-serif;
 	font-size: 20px;
 	font-weight: normal;
 	height: 47px;
@@ -419,7 +449,7 @@ img {
 #body div h1 {
 	background: url(../images/bg-border2.gif) no-repeat center bottom;
 	color: #FC416F;
-	font-family: 'Arial Black';
+	font-family: 'Arial Black' ,'Arial Bold', Gadget, sans-serif;
 	font-size: 40px;
 	font-weight: normal;
 	line-height: 40px;
@@ -693,7 +723,7 @@ img {
 #body.contact div h4 {
 	background: url(../images/bg-border1.gif) no-repeat center bottom;
 	color: #FFFFFF;
-	font-family: 'Arial Black';
+	font-family: 'Arial Black' ,'Arial Bold', Gadget, sans-serif;
 	font-size: 30px;
 	font-weight: normal;
 	line-height: 30px;
@@ -780,11 +810,11 @@ img {
 	text-transform: uppercase;
 	width: 143px;
 }
+
 #body.contact div form input#submit:hover {
 	background-color: #fb416f;
 	border: none;
 	height: 43px;
-	width: 143px;
 }
 
 #body.blogsinglepost div img {

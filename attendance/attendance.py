@@ -6,10 +6,10 @@ import os
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 
-con = sqlite3.connect('livingspace.db', check_same_thread=False)
+con = sqlite3.connect('../database/livingspace.db', check_same_thread=False)
 con.execute("PRAGMA foreign_keys = ON")
 
-@app.route('/markattendance', methods=['GET', 'POST'])
+@app.route('/markattendance', methods=['GET', 'PUT'])
 def markattendance():
 	if(request.method == 'GET'):
 		c = con.cursor()
@@ -25,10 +25,8 @@ def markattendance():
 			retstr += ")"
 			retstr += "!"
 			count +=1
-			if count == 5:
-				break
 		return retstr,200
-	elif(request.method == 'POST'):
+	elif(request.method == 'PUT'):
 		from datetime import datetime
 		req = request.json
 		for key in req.keys():
@@ -36,7 +34,10 @@ def markattendance():
 				c = con.cursor()
 				now = datetime.now()
 				now_date = now.strftime("%d-%m-%Y")
-				c.execute("INSERT INTO Attendance (CDate, s_id) VALUES (?,?);",(now_date, key))
+				try:
+					c.execute("INSERT INTO Attendance (CDate, s_id) VALUES (?,?);",(now_date, key))
+				except:
+					print("Already entered in database")
 				con.commit()
 
 		return "",200
@@ -60,7 +61,7 @@ def viewattendance():
 		result = c.execute("SELECT * FROM Attendance WHERE s_id = (?);", (ID,))
 		result = result.fetchall()
 		if len(result) == 0:
-			return "This student attended all days", 200
+			return name + "!" + ID, 200
 		string = ""
 		string += name + "!"
 		string += result[0][1] + "!"
@@ -73,6 +74,6 @@ def viewattendance():
 
 if __name__ == '__main__':
 	app.run( debug=True,
-            host=os.getenv('LISTEN', '127.0.0.1'),
-            port=int(os.getenv('PORT', '5000'))
+            host=os.getenv('LISTEN', '0.0.0.0'),
+            port=int(os.getenv('PORT', '8000'))
             )

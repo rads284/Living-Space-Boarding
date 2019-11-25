@@ -16,7 +16,7 @@
         document.getElementById("date").innerHTML = "Date:  "+ d + " / " + m + " / " + y;
       }
 
-        var server_addr="http://127.0.0.1:5000"
+        var server_addr="http://127.0.0.1:8003"
           var route="/viewattendance?id="
           function fetchAttendance() {
               console.log('hello world');
@@ -32,10 +32,51 @@
               http_request.onreadystatechange = function() {//Call a function when the state changes.
                   if(http_request.readyState == 4) {
                       // var jsonObj = JSON.parse(http_request.responseText);
-                      body=document.getElementById("body");
+                      body=document.getElementById("dispAtt");
+                      body.innerHTML=  "<h3>Attendance details:</h3>"
                       p = document.createElement('p');
-                      p.innerHTML=http_request.responseText;
-                      body.appendChild(p);
+                      var l = http_request.responseText.split("!");
+
+                      if ( l.length == 1)
+                      {
+                      	p.innerHTML = l[0];
+                      	body.appendChild(p);
+                      }
+                      else 
+                      {
+		                      p.innerHTML= "<p> Name : " +l[0]+"  <br>   " + " Student ID : " +l[1]+" </p> " ;
+		                      absent = document.createElement('p');
+		                      absent.appendChild(p);
+
+		                      dates_list = document.createElement('ul');
+		                      
+		                      dates_list.id = "dates_list";
+		                      if (l.length==2)
+		                      {
+		                      		d = document.createElement('li');
+		                     	    d.innerHTML =  "Present on all days ";
+		                            dates_list.appendChild (d);
+
+		                            absent.appendChild(dates_list);
+		                      }
+		                      else
+		                      {
+		                     	    dates_list.innerHTML =  "Dates Absent: ";
+		                            for(i=2;i<l.length;i++)
+				                      {
+				                      	d = document.createElement('li');
+				                      	d.innerHTML = l[i];
+
+				                      	dates_list.appendChild (d);
+				                      }
+				                      absent.appendChild(dates_list);
+		                      }
+		                      body.appendChild(absent);
+
+		                      
+
+                      }
+                      
                   }
               }
               http_request.open('GET', data_file, true);
@@ -91,11 +132,16 @@
         <p id="date" style="font-size:15px;"></p>
 
             <form id="leave_appr_form">
-                  <br><br><br>
+                  
                   <p style="font-size:21px;" >Enter Student ID</p>
                   <input type="text" name="id" id="id"  onfocus="this.select()" > <br>
                   <br><br>
-                  <input onclick = "fetchAttendance()" type="button" value="View Attendance" id="submit" style="width:200px;">
+                  <input onclick = "fetchAttendance()" type="button" value="View Attendance" id="submit" style="width:200px;margin-bottom: 20px;">
+                  <div id="dispAtt">
+
+
+                  </div>
+
                   <br><br><Br><br><br><br>
                     <br><br>
             </form>

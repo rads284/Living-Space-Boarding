@@ -1,4 +1,3 @@
-from pymongo import MongoClient
 from flask import Flask, request, jsonify
 import sqlite3,json
 from flask import Response
@@ -22,4 +21,4 @@ def hello():
 		return "Database Error!",400
 
 if __name__ == '__main__':
-    app.run(host="127.0.0.1",port=8000,debug=True)
+    app.run(host="0.0.0.0",port=8000, debug=True)

@@ -4,17 +4,13 @@ from flask_login import LoginManager, UserMixin, \
 from flask_cors import CORS
 import sqlite3
 from flask import jsonify
-app = Flask(__name__)
-conn = sqlite3.connect('livingspace.db', check_same_thread=False)
-c = conn.cursor()
-# config
+
 
 app = Flask(__name__)
+conn = sqlite3.connect('../database/livingspace.db', check_same_thread=False)
+c = conn.cursor()
 CORS(app)
-app.config.update(
-    DEBUG = True,
-    SECRET_KEY = 'secret_xxx'
-)
+app.config.update(DEBUG = True,SECRET_KEY = 'secret_xxx')
 
 # flask-login
 login_manager = LoginManager()
@@ -56,11 +52,12 @@ def login():
         if(usertype == "warden"):
             c.execute("SELECT Password from Warden where Email ='%s'" %username)
         else:
-            c.execute("SELECT Password from Parent where Email ='%s'" %username)            
+            c.execute("SELECT Password from Parent where Email ='%s'" %username) 
+                   
         password_db = c.fetchone()[0]
         print(usertype,username,password_db,password)
         if password == password_db:
-            id = username#.split('user')[1]
+            id = username
             user = User(id)
             login_user(user)
             return "asas"
@@ -98,4 +95,4 @@ def load_user(userid):
     
 
 if __name__ == "__main__":
-    app.run(port = 5000)
+    app.run(host="0.0.0.0", port = 8000)
