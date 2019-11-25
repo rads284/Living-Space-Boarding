@@ -28,3 +28,9 @@ services:
     - "8003:8000"
     volumes:
     - ./database:/database
+  otp:
+    build: otp/.
+    ports:
+    - "8004:8000"
+    volumes:
+    - ./database:/database
