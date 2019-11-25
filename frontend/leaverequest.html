@@ -38,8 +38,12 @@
 	            },
 	        showMsg : function(){
 	                if(this.readyState == 4 && this.status == 200){
+											window.location.replace("home.html");
 	                    document.getElementById("stat").innerHTML = this.responseText;
 	                }
+									else{
+										alert("Error");
+									}
 	        },
 
 
@@ -96,12 +100,12 @@
 
 	  },
 	}
-	
+
 	function ajaxreq(){
 	$.ajax({
     method: 'POST',
     url: URL.leaverequestparentURL, // link to your PHP file
-   
+
     data: {
         // url where our server will send request which can't be done by AJAX
         from:$('#start').val(),
@@ -167,13 +171,14 @@
 					<p>Student ID</p>
 					<input type="text" name="username" id="sid" onfocus="this.select()" > <br>
 					  <p>From</p>
-					 <input type="date" class="datetype" id="start" name="startdate"  value="2019-11-22">
+					 <input type="date" class="datetype" id="start" name="startdate"  value="2019-11-22" required="required">
 						<p> To </p>
-						<input type="date" class="datetype" name="enddate" id="end" value="2019-11-22"><br><br>
+						<input type="date" class="datetype" name="enddate" id="end" value="2019-11-22" required="required"><br><br>
 						<p> Reason:</P>
 						<textarea name="reason" rows="7" cols="50" id="reason" name="comment" form="leave_req_form"></textarea>
 						<br><br><br><br>
-						<input onclick = "ajaxreq()" type="button" value="Submit" id="submit">
+						<input style="width:143px;" onclick = "ajaxreq()" type="button" value="Submit" id="submit" >
+						<p id= "stat"> </p>
 
 
 					<br><br><br>

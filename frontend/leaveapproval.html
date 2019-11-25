@@ -25,7 +25,7 @@
 	$.ajax({
     method: 'POST',
     url: URL.leaveapprovalURL, // link to your PHP file
-   
+
     data: {
         // url where our server will send request which can't be done by AJAX
         otp:$('#otp').val(),
@@ -159,7 +159,9 @@
 					<p>OTP</p>
 				  <input type="text" name="username" id="otp" onfocus="this.select()" > <br>
 			 		<br><br><br><br>
-					<button onclick = "ajaxreq()" type="button" value="Submit" id="submit">
+					<input type="button" onclick = "ajaxreq();" type="button" value="Submit" id="submit" style="width:143px;margin-bottom:180px;">
+					<p id= "stat"> </p>
+
 					<br><br><br>
 				</form>
 			</div>
