@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mark Attendance</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+
+
+  <script>
+
+  </script>
+
+</head>
+
+
+
+<body >
+	<div id="page">
+		<div id="header">
+			<div id="navigation">
+				<span id="mobile-navigation">&nbsp;</span>
+				<ul id="menu">
+					<li >
+						<a href="home.html">Home</a>
+					</li>
+					<li class="selected">
+						<div class="dropdown">
+							<a>Leave ▽</a>
+							<div class="dropdown-content" >
+											<hr>
+											<a href="leaverequest.html" style="margin-top:30px;margin:20px;">Leave Request</a> <br> <hr>
+											<a href="leaveapproval.html"  style="margin:20px;"> Leave Approval</a><br> <hr>
+													<a href="viewleaves.html"  style="margin:20px;"> View Leaves</a>
+											<hr>
+							</div>
+						</div>
+					</li>
+					<li >
+						<div class="dropdown2">
+								<a>Attendance ▽</a>
+								<div class="dropdown-content2" >
+												<hr>
+												<a href="markattendance.html" style="margin-top:30px;margin:20px;">Mark Attendance</a> <br> <hr>
+												<a href="viewattendance.html"  style="margin:20px;">View Attendance</a>
+												<hr>
+								</div>
+						</div>
+					</li>
+					<li>
+						<a href="index.html">SIGN OUT</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="body" class="leave" >
+			<div>
+
+				<h4 >View Leaves</h4><br><br>
+        <p id="date" style="font-size:20px;"></p>
+
+
+          <form id = "form">
+              <table border="1" id = "table" >
+                  <tr style="font-weight:bold;color:#fb416f;">
+                      <th> Name</th>
+                      <th> Start </th>
+                      <th> End </th>
+                      <th> Status </th>
+                  </tr>
+                  <!-- <tr >
+                      <td> 001 </td>
+                      <td> John Doe </td>
+                      <td> <input type="radio" name="johndoe" value="present" ></td>
+                      <td> <input type="radio" name="johndoe" value="present" > </td>
+                  </tr>
+                  <tr >
+                      <td> 002 </td>
+                      <td> James </td>
+                      <td> <input type="radio" name="james" value="present" ></td>
+                      <td><input type="radio" name="james" value="present" > </td>
+                  </tr>
+                  <tr >
+                      <td> 003 </td>
+                      <td> Jane Doe </td>
+                      <td> <input type="radio" name="janedoe" value="present" ></td>
+                      <td> <input type="radio" name="janedoe" value="present" > </td>
+                  </tr>
+                  <tr >
+                      <td> 004 </td>
+                      <td> Jack </td>
+                      <td> <input type="radio" name="jack" value="present" ></td>
+                      <td><input type="radio" name="jack" value="present" > </td>
+                  </tr>
+                  <tr >
+                          <td> 005 </td>
+                          <td> Jill </td>
+                          <td> <input type="radio" name="jill" value="present" ></td>
+                          <td> <input type="radio" name="jill" value="present" > </td>
+                    </tr> -->
+
+              </table>
+              <br><br><br>
+              <input onclick = "location.replace('home.html')" type="button" value="Done" id="submit" class="attendanceSub" style="display:block;width:143px;margin-bottom:100px;">
+
+          </form>
+
+
+			</div>
+		</div>
+    <div id="footer">
+			<div>
+				<div class="connect">
+					<a href="https://twitter.com/home" class="twitter">twitter</a>
+					<a href="http://facebook.com" class="facebook">facebook</a>
+					<a href="http://gmail.com" class="googleplus">googleplus</a>
+					<a href="http://pinterest.com" class="pinterest">pinterest</a>
+				</div>
+				<p>&copy; 2019 by EKBAP. All rights reserved.</p>
+			</div>
+		</div>
+	</div>
+</body>
+
+
+
+
+
+</html>

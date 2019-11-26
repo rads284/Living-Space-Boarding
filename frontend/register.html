@@ -15,12 +15,27 @@
 <script type="text/javascript" >
 	function ajaxreq1 (){
 		p =document.createElement('p');
-		p.innerHTML = '<p>Enter OTP</p> <input type="text" name="otp" id="otp" onfocus="this.select()" style="width:350px" required> <input type="button" value="Register" id="submit" onclick="ajaxreq()" >'
+		p.innerHTML = '<p>Enter OTP</p> <input type="text" name="otp" id="otp" onfocus="this.select()" style="width:350px" required> <input type="button" value="Register" id="submit" onclick="ajaxreq2()" >'
 		body= document.getElementById("reg_form");
 		body.appendChild(p);
 
+		$.post(URL.sendOTPURL,{task:"sendOTP",PHONE_NUMBER:$("#phone-number").val()},function(data){
+			console.log(data);
+		});
+	}
 
-
+	function ajaxreq2(){
+		$.post(URL.verifyOTPURL,{task:"verifyOTP",OTP_INPUT:$("#otp").val()},function(data){
+			console.log(data);
+				ajaxreq();
+			
+			if(data["Status"]=="Success"){
+				console.log("Success");
+			}
+			else{
+				console.log("Failure");
+			}
+		});	
 	}
 	function ajaxreq(){
 	$.ajax({
