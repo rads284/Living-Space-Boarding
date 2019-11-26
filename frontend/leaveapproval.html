@@ -14,7 +14,7 @@
 		}
 		window.onload = function(){
 			if(window.location.search!=""){
-				var leaveid = window.location.search.slice(9);
+				var leaveid = window.location.search.slice(10);
 				console.log(leaveid);
 
 				document.getElementById("leaveid").value = leaveid;
@@ -34,11 +34,13 @@
     success: function(data) {
         // we can find any data on external url, cause we've got all page
        	console.log(data);
-       	if(data=="Success"){
+       	if(data=="Leave Approved!"){
        		//Render SUCCESS
+       		alert("Success");
        	}
        	else{
        		//Render FAILURE
+       		alert("failure");
        	}
     },
     error:function() {
@@ -128,7 +130,6 @@
 											<hr>
 											<a href="leaverequest.html" style="margin-top:30px;margin:20px;">Leave Request</a> <br> <hr>
 											<a href="leaveapproval.html"  style="margin:20px;"> Leave Approval</a><br> <hr>
-											<a href="viewleaves.html"  style="margin:20px;"> View Leaves</a>
 											<hr>
 							</div>
 						</div>

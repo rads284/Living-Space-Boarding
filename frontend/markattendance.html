@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Mark Attendance</title>
 	<link rel="stylesheet" href="css/style.css" type="text/css">
+  <script src="js/urls.js" type="text/javascript"></script>
 
 
   <script>
@@ -18,11 +19,10 @@
         getstudents();
       }
 
-          var server_addr="http://localhost:8000"
-          var route="/markattendance"
+          var addr=URL.markattendanceURL;
           function getstudents() {
               console.log('hello world');
-              var data_file = server_addr+route;
+              var data_file = addr;
               //alert(data_file);
               var http_request = new XMLHttpRequest();
               //var params="username="+document.getElementById("username").value+"&actid="+document.getElementById("actId").value+"&category="+document.getElementById("category").value+"&timestamp="+document.getElementById("timestamp").value+"&caption="+document.getElementById("caption").value+"&imgB64="+document.getElementById("imgB64").value ;
@@ -77,7 +77,7 @@
           }
 
           function markattendance(){
-              var data_file = server_addr + route;
+              var data_file = addr;
               console.log(data_file)
               var http_request = new XMLHttpRequest();
               var params = {}
@@ -130,7 +130,6 @@
 											<hr>
 											<a href="leaverequest.html" style="margin-top:30px;margin:20px;">Leave Request</a> <br> <hr>
 											<a href="leaveapproval.html"  style="margin:20px;"> Leave Approval</a><br> <hr>
-													<a href="viewleaves.html"  style="margin:20px;"> View Leaves</a>
 											<hr>
 							</div>
 						</div>

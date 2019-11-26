@@ -141,7 +141,7 @@ input[type=date]::-webkit-calendar-picker-indicator{
 	margin: 0 auto 0px;
 	padding: 0;
 	text-align: center;
-	text-transform: uppercase;
+	text-transform: none;
 	width: 400px;
 }
 #body.leave  input[type=date]{
@@ -190,7 +190,7 @@ input[type=date]::-webkit-calendar-picker-indicator{
 	margin: 0;
 	padding: 14px 0 29px;
 	text-align: center;
-	text-transform: uppercase;
+	text-transform: none;
 }
 
 body {
@@ -272,7 +272,7 @@ img {
 	margin: 0;
 	padding: 0;
 	text-align: center;
-	text-transform: uppercase;
+	text-transform: none;
 	width: auto;
 }
 #header div ul li.selected a, #header div ul li.selected a:hover {
@@ -323,7 +323,7 @@ img {
 	margin: 0 auto 32px;
 	padding: 0;
 	text-align: center;
-	text-transform: uppercase;
+	text-transform: none;
 	width: 100%; /*89.5833%;*/
 	 text-shadow: 2px 1px 3px rgb(0,0,0,0.5);
 }
@@ -348,7 +348,7 @@ img {
 	margin: 0;
 	padding: 0;
 	text-align: center;
-	text-transform: uppercase;
+	text-transform: none;
 	width: 63.142857142857%;
 }
 #body.home div.header div span a.signup {
@@ -365,7 +365,7 @@ img {
 	margin: 0;
 	padding: 0;
 	text-align: center;
-	text-transform: uppercase;
+	text-transform: none;
 	width: 32.571428571429%;
 }
 #body.home div.header div img {
@@ -397,7 +397,7 @@ img {
 	margin: 0;
 	padding: 0 0 50px;
 	text-align: center;
-	text-transform: uppercase;
+	text-transform: none;
 }
 #body.home div.body div p {
 	background: url(../images/bg-border1.gif) no-repeat center bottom;
@@ -438,7 +438,7 @@ img {
 	margin: 30px auto 0;
 	padding: 0;
 	text-align: center;
-	text-transform: uppercase;
+	text-transform: none;
 	width: 230px;
 }
 #body.home div.body div a.more:hover {
@@ -470,7 +470,7 @@ img {
 	margin: 0;
 	padding: 0 0 20px;
 	text-align: center;
-	text-transform: uppercase;
+	text-transform: none;
 }
 #body div img {
 	display: block;
@@ -646,7 +646,7 @@ img {
 	margin: 0 0 16px;
 	padding: 0;
 	text-align: left;
-	text-transform: uppercase;
+	text-transform: none;
 	width: auto;
 }
 #body div ul li div p {
@@ -687,7 +687,7 @@ img {
 	margin: 0 0 40px;
 	padding: 0;
 	text-align: center;
-	text-transform: uppercase;
+	text-transform: none;
 	width: 136px;
 }
 #body div ul li div a.more:hover {
@@ -706,7 +706,7 @@ img {
 #body.contact div h2 {
 	font-weight: bold;
 	margin: 0 auto 18px;
-	text-transform: uppercase;
+	text-transform: none;
 }
 #body.contact div p, #body.contact div a {
 	color: #FFFFFF;
@@ -744,7 +744,7 @@ img {
 	margin: 0;
 	padding: 14px 0 29px;
 	text-align: center;
-	text-transform: uppercase;
+	text-transform: none;
 }
 #body.contact div form {
 	display: block;
@@ -766,7 +766,7 @@ img {
 	margin: 0 0 17px;
 	padding: 0 4px;
 	text-align: center;
-	text-transform: uppercase;
+	text-transform: none;
 	width: 491px;
 }
 #body.contact div form textarea {
@@ -784,7 +784,7 @@ img {
 	padding: 7px 4px 0;
 	resize: none;
 	text-align: center;
-	text-transform: uppercase;
+	text-transform: none;
 	width: 491px;
 }
  #body.contact div form select{
@@ -803,7 +803,7 @@ img {
  	padding: 2px 2px 0;
  	resize: none;
  	text-align: center;
- 	text-transform: uppercase;
+ 	text-transform: none;
  	width: 250px;
 	background-color: black;
  }
@@ -821,7 +821,7 @@ img {
 	margin: 0 auto 16px;
 	padding: 0;
 	text-align: center;
-	text-transform: uppercase;
+	text-transform: none;
 	width: 143px;
 }
 
@@ -857,7 +857,7 @@ img {
 	margin: 0 0 13px;
 	padding: 0;
 	text-align: left;
-	text-transform: uppercase;
+	text-transform: none;
 }
 #body.blogsinglepost div div p {
 	color: #FFFFFF;

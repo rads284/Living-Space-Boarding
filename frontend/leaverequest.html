@@ -100,11 +100,16 @@
 
 	  },
 	}
-
+	if(localStorage.getItem("user")=="parent"){
+		urls = URL.leaverequestwardenURL;
+	}
+	else{
+		urls = URL.leaverequestparentURL;
+	}
 	function ajaxreq(){
 	$.ajax({
     method: 'POST',
-    url: URL.leaverequestparentURL, // link to your PHP file
+    url: urls, // link to your PHP file
 
     data: {
         // url where our server will send request which can't be done by AJAX
@@ -116,9 +121,12 @@
     success: function(data) {
         // we can find any data on external url, cause we've got all page
        	console.log(data);
+       	alert("Mail Sent!");
+       	window.location.replace("http://localhost/home.html");
     },
     error:function() {
         console.log('Error');
+        alert("Failed!");
     }
 });
 }
@@ -142,7 +150,7 @@
 																<hr>
 																<a href="leaverequest.html" style="margin-top:30px;margin:20px;">Leave Request</a> <br> <hr>
 																<a href="leaveapproval.html"  style="margin:20px;"> Leave Approval</a><br> <hr>
-																		<a href="viewleaves.html"  style="margin:20px;"> View Leaves</a>
+																		
 																			<hr>
 												</div>
 											</div>

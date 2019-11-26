@@ -326,7 +326,7 @@ img {
  padding: 2px 2px 0;
  resize: none;
  text-align: center;
- text-transform: uppercase;
+ text-transform: none;
  width: 250px;
  background-color: black;
 }

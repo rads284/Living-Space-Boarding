@@ -11,6 +11,7 @@ import requests
 import logging
 import uuid
 import random
+import sys
 from werkzeug.exceptions import BadRequest
 '''
     Leave management - [create leave request, approve leave request]
@@ -47,7 +48,14 @@ def create_leave(from_t, to_t, reason, sid, w_app="No", p_app="No"):
     to_t = '-'.join(to_t.split('-')[::-1])
     leave_id = str(uuid.uuid1())
     row = (leave_id, sid, from_t, to_t, w_app, p_app)
+    print(from_t,file=sys.stderr)
+    print(to_t,file=sys.stderr)
+    print(leave_id,file=sys.stderr)
+    print(leave_id,file=sys.stderr)
+    print(row,file=sys.stderr)
     c.execute("INSERT INTO Leave(id,s_id,CheckIn,CheckOut,ApprovedW,ApprovedP) VALUES(?,?,?,?,?,?)", row)
+    print("hello123",c.execute("SELECT * FROM LEAVE").fetchall(),file=sys.stderr)
+
     return leave_id
 
 
@@ -87,7 +95,7 @@ def notify_parent():
     parent_id = c.fetchone()[0]
     c.execute("SELECT FullName from Student where Id ='%s'" % sid)
     student_name = c.fetchone()[0]
-    leave_url = "https://LivingSpaceBoarding/LeaveApprove/?leave_id=" + leave_id
+    leave_url = "http://localhost/leaveapproval.html?leave_id=" + leave_id
     msg = Message('Leave Request Approval', sender='livingspaceboarding1@gmail.com', recipients=[parent_id])
     msg.body = "Dear Parent,\n\t Your ward, " + student_name + " (Student ID: " + sid + ") has raised a leave application from " + from_t + " to " + to_t + " for the following reason: " + reason + ". Kindly click on the following link to approve the Leave Request : " + leave_url +  "\nYOUR OTP IS : "+ str(OTP) + "\n\n Regards,\nLivingSpaceBoarding" 
     try:
@@ -99,18 +107,19 @@ def notify_parent():
 
 @app.route('/notify_warden', methods=['POST'])
 def notify_warden():
-    try:
+    # try:
+    if 1:
         from_t = request.form.get("from", False)
         to_t = request.form["to"]
         reason = request.form["reason"]
         sid = request.form["sid"]
-        pid = request.form["id"]
-    except Exception as e:
-        return BadRequest("The data provided is invalid")
-    c.execute("SELECT Email from Parent where Id = (SELECT p_id from Student where Id ='%s')" % sid)
-    p_id = c.fetchone()[0]
-    if(p_id != pid):
-        return make_response("Integrity Error", 400)
+        # pid = request.form["id"]
+    # except Exception as e:
+    #     return BadRequest("The data provided is invalid")
+    #c.execute("SELECT Email from Parent where Id = (SELECT p_id from Student where Id ='%s')" % sid)
+    #p_id = c.fetchone()[0]
+    # if(p_id != pid):
+    #     return make_response("Integrity Error", 400)
     c.execute("SELECT Email from Warden where Id = (SELECT w_id from Student where Id = '%s')" % sid)
     warden_id = c.fetchone()[0]
     logging.info("Warden mail Id:", warden_id)
@@ -118,22 +127,28 @@ def notify_warden():
     student_name = c.fetchone()[0]
     OTP = random.randint(1000, 9999)
     leave_id = create_leave(from_t, to_t, reason, sid, p_app="Yes")
-    leave_url = "https://LivingSpaceBoarding/LeaveApprove/?leave_id=" + leave_id
+    leave_url = "http://localhost/leaveapproval.html?leave_id=" + leave_id
     msg = Message('Leave Request Approval', sender='livingspaceboarding1@gmail.com', recipients=[warden_id])
     msg.body = "Dear Warden,\n\t Parent of " + student_name + " (Student ID: " + sid+")  has raised a leave application from " + from_t + " to " + to_t + " for the following reason: " + reason + ". Kindly click on the following link to approve the Leave Request : " + leave_url + "\nYOUR OTP IS : "+ str(OTP)
-    try:
+    # try:
+    if 1:
         mail.send(msg)
-    except Exception as e:
-        return make_response("Couldnt send mail", 500)
+    # except Exception as e:
+    #     return make_response("Couldn't send mail", 500)
     return "Message Sent!"
 
 
-@app.route('/approve_leave', methods=['PUT'])
+@app.route('/approve_leave', methods=['POST'])
 def approve_leave():
     logging.info(request.form)
-    leave_id = request.args['leave_id']
+    print(request.form,file=sys.stderr)
+    leave_id = request.form['leaveid']
     c.execute("SELECT ApprovedP,ApprovedW from Leave where Id='%s'" % leave_id)
     a_p, a_w = c.fetchone()
+    print("hello", file=sys.stderr)
+
+    print(a_p,a_w, file=sys.stderr)
+    print("hello2", file=sys.stderr)
     if(a_p):
         c.execute("UPDATE  Leave SET ApprovedW='Yes' where Id ='%s'" % leave_id)
     else:

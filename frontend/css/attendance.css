@@ -82,7 +82,7 @@ img {
 	margin: 0;
 	padding: 0;
 	text-align: center;
-	text-transform: uppercase;
+	text-transform: none;
 	width: auto;
 }
 #header div ul li.selected a, #header div ul li.selected a:hover {
@@ -132,7 +132,7 @@ img {
 	margin: 0 auto 32px;
 	padding: 0;
 	text-align: center;
-	text-transform: uppercase;
+	text-transform: none;
 	width: 100%; /*89.5833%;*/
 }
 #body.home div.header div span {
@@ -156,6 +156,6 @@ img {
 	margin: 0;
 	padding: 0;
 	text-align: center;
-	text-transform: uppercase;
+	text-transform: none;
 	width: 63.142857142857%;
 }
