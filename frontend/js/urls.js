@@ -5,5 +5,6 @@ var URL = {
 	leaverequestwardenURL : "http://localhost:8002/notify_warden",
 	leaveapprovalURL : "http://localhost:8002/approve_leave",
 	viewattendanceURL : "http://localhost:8003/viewattendance",
-	markattendanceURL : "http://localhost:8003/markattendance"
+	markattendanceURL : "http://localhost:8003/markattendance",
+	sendOTPURL : "http://localhost:8004/otp"
 }
