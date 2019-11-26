@@ -36,7 +36,7 @@ app.config.update(
                   MAIL_SERVER='smtp.gmail.com',
                   MAIL_PORT=465,
                   MAIL_USE_SSL=True,
-                  MAIL_USERNAME='livingspaceboarding@gmail.com',
+                  MAIL_USERNAME='livingspaceboarding1@gmail.com',
                   MAIL_PASSWORD='Bandar-vihar'
                  )
 mail = Mail(app)
@@ -88,7 +88,7 @@ def notify_parent():
     c.execute("SELECT FullName from Student where Id ='%s'" % sid)
     student_name = c.fetchone()[0]
     leave_url = "https://LivingSpaceBoarding/LeaveApprove/?leave_id=" + leave_id
-    msg = Message('Leave Request Approval', sender='livingspaceboarding@gmail.com', recipients=[parent_id])
+    msg = Message('Leave Request Approval', sender='livingspaceboarding1@gmail.com', recipients=[parent_id])
     msg.body = "Dear Parent,\n\t Your ward, " + student_name + " (Student ID: " + sid + ") has raised a leave application from " + from_t + " to " + to_t + " for the following reason: " + reason + ". Kindly click on the following link to approve the Leave Request : " + leave_url +  "\nYOUR OTP IS : "+ str(OTP) + "\n\n Regards,\nLivingSpaceBoarding" 
     try:
         mail.send(msg)
@@ -107,8 +107,9 @@ def notify_warden():
         pid = request.form["id"]
     except Exception as e:
         return BadRequest("The data provided is invalid")
-    p_id = c.execute("SELECT p_id from Student where Id = '%s'" % sid)
-    if(not(p_id == pid)):
+    c.execute("SELECT Email from Parent where Id = (SELECT p_id from Student where Id ='%s')" % sid)
+    p_id = c.fetchone()[0]
+    if(p_id != pid):
         return make_response("Integrity Error", 400)
     c.execute("SELECT Email from Warden where Id = (SELECT w_id from Student where Id = '%s')" % sid)
     warden_id = c.fetchone()[0]
@@ -118,12 +119,12 @@ def notify_warden():
     OTP = random.randint(1000, 9999)
     leave_id = create_leave(from_t, to_t, reason, sid, p_app="Yes")
     leave_url = "https://LivingSpaceBoarding/LeaveApprove/?leave_id=" + leave_id
-    msg = Message('Leave Request Approval', sender='livingspaceboarding@gmail.com', recipients=[warden_id])
+    msg = Message('Leave Request Approval', sender='livingspaceboarding1@gmail.com', recipients=[warden_id])
     msg.body = "Dear Warden,\n\t Parent of " + student_name + " (Student ID: " + sid+")  has raised a leave application from " + from_t + " to " + to_t + " for the following reason: " + reason + ". Kindly click on the following link to approve the Leave Request : " + leave_url + "\nYOUR OTP IS : "+ str(OTP)
     try:
         mail.send(msg)
     except Exception as e:
-        return 500
+        return make_response("Couldnt send mail", 500)
     return "Message Sent!"
 
 
@@ -152,9 +153,9 @@ def get_s_names(id, utype):
 @app.route('/get_leaves/<id>/<utype>', methods=['GET'])
 def get_leaves(id, utype):
     if(utype == 'warden'):
-        c.execute("SELECT * from leave where s_id = (SELECT s_id from Warden where w_id = '%s')" % id)
+        c.execute("SELECT FullName, CheckIn, CheckOut, ApprovedP as Status from leave, Student where s_id = (SELECT s_id from Warden where Email = '%s')" % id)
     else:
-        c.execute("SELECT * from leave where s_id = (SELECT s_id from Parent where p_id = '%s')" % id)
+        c.execute("SELECT Student.FullName, CheckIn, CheckOut, ApprovedW from leave, Student where leave.s_id = (SELECT s_id from Parent where Email = '%s') and leave.s_id = Student.Id" % id)
     leave_details = c.fetchall()
     return json.dumps(leave_details)
 
